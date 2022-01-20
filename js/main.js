@@ -1,31 +1,17 @@
-// Select Skills Selector
+let  numberPercent = document.querySelectorAll('.countbar')
+let getPercent = Array.from(numberPercent)
 
-let ourSkills = document.querySelector(".skills");
-
-window.onscroll = function () {
-
-  // Skills Offset Top
-let skillsOffsetTop = ourSkills.offsetTop;
-
-  // Skills Outer Height
-let skillsOuterHeight = ourSkills.offsetHeight;
-
-  // Window Height
-let windowHeight = this.innerHeight;
-
-  // Window ScrollTop
-let windowScrollTop = this.pageYOffset;
-
-if (windowScrollTop > (skillsOffsetTop + skillsOuterHeight -windowHeight)) {
-
-    let allSkills = document.querySelectorAll(".skill-box .skill-progress span");
-
-    allSkills.forEach(skill => {
-
-skill.style.width = skill.dataset.progress;
-
-    });
-
-}
-
-};
+getPercent.map((items) => {
+    let startCount = 0
+    let progressBar = () => {
+        startCount ++
+        items.innerHTML = `<h3>${startCount}%</h3>`
+        items.style.width = `${startCount}%`
+        if(startCount == items.dataset.percentnumber) {
+            clearInterval(stop)
+        }
+    }
+    let stop = setInterval(() => {
+        progressBar()
+    },25)
+})
